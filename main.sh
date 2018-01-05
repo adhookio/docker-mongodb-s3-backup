@@ -1,16 +1,5 @@
 #!/bin/sh -xe
 
-
-if [ -z "${AWS_KEY}" ]; then
-    echo "The environment variable key is not set. Attempting to create empty creds file to use role."
-    aws_key=""
-fi
-
-if [ -z "${AWS_SECRET}" ]; then
-    echo "The environment variable secret is not set."
-    aws_secret=""
-fi
-
 TIMESTAMP=`date +%F-%H%M`
 S3_BUCKET_PATH="mongodumps"
 
