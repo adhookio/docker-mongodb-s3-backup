@@ -3,8 +3,16 @@
 TIMESTAMP=`date +%F-%H%M`
 S3_BUCKET_PATH="mongodumps"
 
-# Create backup
-mongodump -h ${MONGO_HOST} -d ${MONGO_DATABASE} -u ${MONGO_USER} -p ${MONGO_PASSWORD}
+
+if [ -z "${MONGO_USER}" ];
+then
+    # Create backup (without credentials)
+    mongodump -h ${MONGO_HOST} -d ${MONGO_DATABASE}
+
+else
+    # Create backup (with credentials)
+    mongodump -h ${MONGO_HOST} -d ${MONGO_DATABASE} -u ${MONGO_USER} -p ${MONGO_PASSWORD}
+fi
 
 # Add timestamp to backup
 mv dump mongodb-$TIMESTAMP
