@@ -22,8 +22,11 @@ Backup your MongoDB to your Amazon S3 bucket.
         --rm \
         adhook/docker-mongodb-s3-backup \
 
+The params ```MONGO_USER``` and ```MONGO_PASSWORD``` are optional.
 
 👉 The container will be deleted after the backup (`--rm` Option).
+
+
 
 # Create a cronjob
 
