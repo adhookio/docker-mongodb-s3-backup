@@ -1,11 +1,13 @@
 FROM mongo
 
-RUN apt-get update \
-    && apt-get install wget -qq --no-install-recommends \
-    && wget -O- -q http://s3tools.org/repo/deb-all/stable/s3tools.key | apt-key add - \
-    && wget -O/etc/apt/sources.list.d/s3tools.list http://s3tools.org/repo/deb-all/stable/s3tools.list \
-    && apt-get update \
-    && apt-get install s3cmd -qq --no-install-recommends
+RUN apt-get update
+RUN apt-get install git -qq --no-install-recommends
+RUN apt-get install python-pip -qq --no-install-recommends
+RUN apt-get install python-setuptools -qq --no-install-recommends
+RUN pip install python-dateutil
+
+RUN git clone https://github.com/s3tools/s3cmd.git /opt/s3cmd
+RUN ln -s /opt/s3cmd/s3cmd /usr/bin/s3cmd
 
 ADD main.sh /opt/main.sh
 
